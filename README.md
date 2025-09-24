@@ -56,6 +56,8 @@ print(dataset.groupby('Class').size())
 dataset.plot(kind='box', subplots=True, layout=(2,2), sharex=False, sharey=False)
 plt.show()
 
+![image alt](https://github.com/caydenrgarrett/Iris-ML-Classifier/blob/e79c83bab804f50bc369e362780468b5be75c1e2/box%26whiskerplot.png)
+
 # Creating histograms of each output to get a better idea of each distribution
 dataset.hist()
 plt.show()
