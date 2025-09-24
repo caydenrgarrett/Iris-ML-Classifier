@@ -117,6 +117,8 @@ for name, model in models:
 	print('%s: %f (%f)' % (name, cv_results.mean(), cv_results.std()))
 ```
 
+![image alt](https://github.com/caydenrgarrett/Iris-ML-Classifier/blob/db46a6f79b515d6cef0de974b2a4c06fa36b558b/comp.png)
+
 ### 5. Final Model & Validation
 The chosen model (SVM) was tested on a 20% hold-out validation set:
 
