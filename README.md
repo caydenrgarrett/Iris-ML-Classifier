@@ -67,6 +67,7 @@ plt.show()
 ```
 ![image alt](https://github.com/caydenrgarrett/Iris-ML-Classifier/blob/e79c83bab804f50bc369e362780468b5be75c1e2/box%26whiskerplot.png) <br>
 ![image alt](https://github.com/caydenrgarrett/Iris-ML-Classifier/blob/0a9fc76f9a2f7c6bb0e1c1d2f86bdd1185a2c67f/hist.png)
+![image alt](https://github.com/caydenrgarrett/Iris-ML-Classifier/blob/e1a317c3578fdc2562c13ad82e3c284f53921140/multv.png)
 
 ### 3. Model Building
 We trained and evaluated 6 models with 10-fold cross-validation:
