@@ -33,10 +33,38 @@ pip install numpy scipy matplotlib pandas scikit-learn
 - Summarize shape, sample rows, statistical summaries
 - Check class distribution
 
-### 2. Data Visualization
-- Box plots to inspect variable distribution
-- Histograms to view Gaussian-like distributions
-- Scatter matrix to explore relationships between variables
+```python
+import pandas as pd
+
+url = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/iris.csv"
+names = ['Sepal-Length', 'Sepal-Width', 'Petal-Length', 'Petal-Width', 'Class']
+dataset = pd.read_csv(url, names=names)
+
+print(dataset.shape)
+
+# Preview of first 20 lines
+print(dataset.head(20))
+# Descriptions
+print(dataset.describe())
+
+# Class Distributions
+print(dataset.groupby('Class').size())
+```
+
+```python
+# Box and Whisker Plots
+dataset.plot(kind='box', subplots=True, layout=(2,2), sharex=False, sharey=False)
+plt.show()
+
+# Creating histograms of each output to get a better idea of each distribution
+dataset.hist()
+plt.show()
+
+from pandas.plotting import scatter_matrix
+
+scatter_matrix(dataset)
+plt.show()
+```
 
 ### 3. Model Building
 We trained and evaluated 6 models with 10-fold cross-validation:
@@ -48,6 +76,13 @@ We trained and evaluated 6 models with 10-fold cross-validation:
 - Gaussian Naive Bayes (NB)
 - Support Vector Machines (SVM)
 
+  ```python
+  array = dataset.values
+  X = array[:,0:4]
+  y = array[:,4]
+  X_train, X_validation, Y_train, Y_validation = train_test_split(X, y, test_size=0.20, random_state=1)
+  
+
 ### 4. Model Comparison
 Cross-validation accuracy scores (may vary on re-run):
 
@@ -58,8 +93,40 @@ Cross-validation accuracy scores (may vary on re-run):
 - NB:   0.9489 (0.0563)
 - **SVM:  0.9840 (0.0321)**
 
+```python
+  # Spot Check Algo's
+models = []
+models.append(('LR', LogisticRegression(solver='liblinear', multi_class='ovr')))
+models.append(('LDA', LinearDiscriminantAnalysis()))
+models.append(('KNN', KNeighborsClassifier()))
+models.append(('CART', DecisionTreeClassifier()))
+models.append(('NB', GaussianNB()))
+models.append(('SVM', SVC(gamma='auto')))
+
+# Evaluate the model in turn
+results = []
+names = []
+for name, model in models:
+	kfold = StratifiedKFold(n_splits=10, random_state=1, shuffle=True)
+	cv_results = cross_val_score(model, X_train, Y_train, cv=kfold, scoring='accuracy')
+	results.append(cv_results)
+	names.append(name)
+	print('%s: %f (%f)' % (name, cv_results.mean(), cv_results.std()))
+```
+
 ### 5. Final Model & Validation
 The chosen model (SVM) was tested on a 20% hold-out validation set:
+
+```python
+model = SVC(gamma="auto")
+model.fit(X_train, Y_train)
+predictions = model.predict(X_validation)
+
+# Evaluate Predictions
+print(accuracy_score(Y_validation, predictions))
+print(confusion_matrix(Y_validation, predictions))
+print(classification_report(Y_validation, predictions))
+```
 
 - **Accuracy**: ~97%
 - **Confusion Matrix**:
