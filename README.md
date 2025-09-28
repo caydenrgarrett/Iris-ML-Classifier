@@ -1,4 +1,6 @@
-# 🌸 Iris Flower Classification with Machine Learning
+# 🌸 Iris Flower Classification with Machine Learning <br>
+
+![image alt](https://floralife.com/wp-content/uploads/2022/04/Iris_2560x1790.png)
 
 This project demonstrates a complete machine learning workflow using the famous Iris flowers dataset. The Iris dataset is considered the "Hello World" of machine learning and statistics because it's widely used for practice, learning, and benchmarking.
 
